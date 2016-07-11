@@ -1,0 +1,12 @@
+FROM donysukardi/erpnext:{{VERSION}}
+MAINTAINER Dony Sukardi <ds@dsds.io>
+
+ARG BRANCH
+ENV SCHOOLS_BRANCH $BRANCH
+
+USER $FRAPPE_USER
+WORKDIR /home/$FRAPPE_USER/frappe-bench
+RUN bench get-app schools https://github.com/frappe/schools --branch $SCHOOLS_BRANCH
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["app"]
