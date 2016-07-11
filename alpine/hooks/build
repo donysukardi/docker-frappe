@@ -1,0 +1,27 @@
+#!/bin/bash
+# format index.docker.xxxx/tag, strips all
+TAG=$(echo ${IMAGE_NAME##*/})
+
+# format frappe:latest, extract frappe + latest
+IFS=':' read -r -a TAG_VALUES <<< "$TAG"
+IMG="${TAG_VALUES[0]:-frappe}"
+IMG_TAG="${TAG_VALUES[1]:-latest}"
+
+# format: latest-alpine, extract latest + alpine
+IFS='-' read -r -a TAG_VALUES <<< "$IMG_TAG"
+VERSION="${TAG_VALUES[0]:-latest}"
+FLAVOR="${TAG_VALUES[1]:-alpine}"
+
+CONTEXT="./$IMG"
+
+BRANCH=$(case "$VERSION" in
+  ("latest") echo "develop" ;;
+  ("stable") echo "master" ;;
+  (*) ;;
+esac);
+
+# mv scripts "${CONTEXT}"
+
+docker build \
+  --build-arg BRANCH=$BRANCH \
+  -t $IMAGE_NAME $CONTEXT

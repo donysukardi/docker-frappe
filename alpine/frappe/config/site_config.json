@@ -1,0 +1,23 @@
+{
+  "admin_password": "frappe",
+  "db_host": "db",
+  "db_name": "frappe",
+  "db_password": "frappe",
+  "db_user": "frappe",
+  "deny_multiple_logins": false,
+  "disable_website_cache": false,
+  "dns_multitenant": false,
+  "host_name": "localhost",
+  "logging": "1",
+  "mail_login": "postmaster@dsds.io",
+  "mail_password": "943b429b651f75189e23105bbc838227",
+  "mail_port": "25",
+  "mail_server": "smtp.mailgun.org",
+  "mute_emails": false,
+  "redis_cache": "redis://redis-cache",
+  "redis_queue": "redis://redis-queue",
+  "redis_socketio": "redis://redis-socketio",
+  "root_password": "root",
+  "serve_default_site": true,
+  "use_ssl": false
+}

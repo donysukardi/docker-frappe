@@ -1,0 +1,12 @@
+#!/bin/sh
+# format frappe:latest, erpnext:stable
+TAG=$(echo ${IMAGE_NAME##*/})
+
+# format latest, latest-ubuntu, latest-alpine
+IFS=':' read -r -a TAG_VALUES <<< "$TAG"
+VERSION="${TAG_VALUES[0]:-latest}"
+FLAVOR="${TAG_VALUES[1]:-alpine}"
+
+CONTEXT
+
+docker build --build-arg TAG=$TAG --build-arg IMAGE_NAME=$IMAGE_NAME -t $IMAGE_NAME .
