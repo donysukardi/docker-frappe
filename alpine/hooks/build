@@ -14,11 +14,13 @@ FLAVOR="${TAG_VALUES[1]:-alpine}"
 
 CONTEXT="./$IMG"
 
-BRANCH=$(case "$VERSION" in
+export BRANCH=$(case "$VERSION" in
   ("latest") echo "develop" ;;
   ("stable") echo "master" ;;
   (*) ;;
 esac);
+
+sed "s/{{VERSION}}/${VERSION}/" "$CONTEXT/Dockerfile.tmpl" > "$CONTEXT/Dockerfile"
 
 # mv scripts "${CONTEXT}"
 
