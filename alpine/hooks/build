@@ -20,7 +20,9 @@ export BRANCH=$(case "$VERSION" in
   (*) ;;
 esac);
 
-sed "s/{{VERSION}}/${VERSION}/" "$CONTEXT/Dockerfile.tmpl" > "$CONTEXT/Dockerfile"
+if [ -f "$CONTEXT/Dockerfile.tmpl" ]; then
+  sed "s/{{VERSION}}/${VERSION}/" "$CONTEXT/Dockerfile.tmpl" > "$CONTEXT/Dockerfile"
+fi;
 
 # mv scripts "${CONTEXT}"
 
