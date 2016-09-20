@@ -11,6 +11,7 @@ ENV FRAPPE_BRANCH $BRANCH
 
 RUN apk add --update \
     alpine-sdk \
+    linux-headers \
     py-pip \
     python-dev \
     mariadb-client \
