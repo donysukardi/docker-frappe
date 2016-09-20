@@ -10,3 +10,5 @@ RUN bench get-app erpnext https://github.com/frappe/erpnext --branch $ERPNEXT_BR
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["app"]
+
+VOLUME ["/home/$FRAPPE_USER/frappe-bench/sites/assets", "/home/$FRAPPE_USER/frappe-bench/apps/erpnext/erpnext/public", "/home/$FRAPPE_USER/frappe-bench/apps/frappe/frappe/public"]
