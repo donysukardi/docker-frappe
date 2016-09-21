@@ -19,6 +19,5 @@
   "redis_socketio": "redis://redis-socketio",
   "root_password": "root",
   "serve_default_site": true,
-  "use_ssl": false,
-  "developer_mode": "1"
+  "use_ssl": false
 }
