@@ -11,7 +11,7 @@ web:
     - node-socketio
 
 app:
-  image: donysukardi/erpnext
+  image: donysukardi/erpnext:stable
   links:
     - db
     - redis-socketio
@@ -19,7 +19,7 @@ app:
     - redis-queue
 
 scheduler:
-  image: donysukardi/erpnext
+  image: donysukardi/erpnext:stable
   command: scheduler
   links:
     - db
@@ -28,7 +28,7 @@ scheduler:
     - redis-queue
 
 worker-default:
-  image: donysukardi/erpnext
+  image: donysukardi/erpnext:stable
   command: worker-default
   links:
     - db
@@ -37,7 +37,7 @@ worker-default:
     - redis-queue
 
 worker-long:
-  image: donysukardi/erpnext
+  image: donysukardi/erpnext:stable
   command: worker-long
   links:
     - db
@@ -46,7 +46,7 @@ worker-long:
     - redis-queue
 
 worker-short:
-  image: donysukardi/erpnext
+  image: donysukardi/erpnext:stable
   command: worker-short
   links:
     - db
@@ -64,7 +64,7 @@ redis-socketio:
   image: redis
 
 node-socketio:
-  image: donysukardi/erpnext
+  image: donysukardi/erpnext:stable
   command: node-socketio
   links:
     - db
