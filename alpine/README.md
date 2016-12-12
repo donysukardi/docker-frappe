@@ -6,9 +6,9 @@ Follow the steps below to run your own local installation of ERPNext.
 
 ## Build the containers
 
-1. Start from within the `alpine` directory
-2. Run: `IMAGE_NAME=donysukardi/frappe:stable ./hooks/build`
-3. Run: `IMAGE_NAME=donysukardi/erpnext:stable ./hooks/build`
+1. Start from within the `alpine` directory.
+2. Run: `IMAGE_NAME=donysukardi/frappe:stable ./hooks/build`.
+3. Run: `IMAGE_NAME=donysukardi/erpnext:stable ./hooks/build`.
 
 ## Start a local version of ERPNext
 
