@@ -1,83 +1,67 @@
-web:
-  image: nginx:alpine
-  volumes:
-    - './config/nginx.conf:/etc/nginx/conf.d/default.conf:ro'
-  volumes_from:
-    - app
-  ports:
-    - '80:80'
-  links:
-    - app
-    - node-socketio
+version: '2'
 
-app:
-  image: donysukardi/erpnext:stable
-  links:
-    - db
-    - redis-socketio
-    - redis-cache
-    - redis-queue
+services:
 
-scheduler:
-  image: donysukardi/erpnext:stable
-  command: scheduler
-  links:
-    - db
-    - redis-socketio
-    - redis-cache
-    - redis-queue
+  web:
+    image: nginx:alpine
+    container_name: erpnext-web
+    volumes:
+      - './config/nginx.conf:/etc/nginx/conf.d/default.conf:ro'
+    volumes_from:
+      - app
+    ports:
+      - '80:80'
 
-worker-default:
-  image: donysukardi/erpnext:stable
-  command: worker-default
-  links:
-    - db
-    - redis-socketio
-    - redis-cache
-    - redis-queue
+  app:
+    image: donysukardi/erpnext:stable
+    container_name: erpnext-app
+    depends_on:
+      - db
 
-worker-long:
-  image: donysukardi/erpnext:stable
-  command: worker-long
-  links:
-    - db
-    - redis-socketio
-    - redis-cache
-    - redis-queue
+  scheduler:
+    image: donysukardi/erpnext:stable
+    container_name: erpnext-scheduler
+    command: scheduler
 
-worker-short:
-  image: donysukardi/erpnext:stable
-  command: worker-short
-  links:
-    - db
-    - redis-socketio
-    - redis-cache
-    - redis-queue
+  worker-default:
+    image: donysukardi/erpnext:stable
+    container_name: erpnext-worker-default
+    command: worker-default
 
-redis-cache:
-  image: redis
+  worker-long:
+    image: donysukardi/erpnext:stable
+    container_name: erpnext-worker-long
+    command: worker-long
 
-redis-queue:
-  image: redis
+  worker-short:
+    image: donysukardi/erpnext:stable
+    container_name: erpnext-worker-short
+    command: worker-short
 
-redis-socketio:
-  image: redis
+  redis-cache:
+    image: redis
+    container_name: erpnext-redis-cache
 
-node-socketio:
-  image: donysukardi/erpnext:stable
-  command: node-socketio
-  links:
-    - db
-    - redis-socketio
-    - redis-cache
-    - redis-queue
+  redis-queue:
+    image: redis
+    container_name: erpnext-redis-queue
 
-db:
-  image: mariadb:latest
-  volumes:
-    - './config/my.cnf:/etc/mysql/conf.d/frappe.cnf'
-  environment:
-    - MYSQL_ROOT_PASSWORD=asdfasdfasdf
-    - MYSQL_USER=frappe
-    - MYSQL_PASSWORD=frappe
-    - MYSQL_DATABASE=frappe
+  redis-socketio:
+    image: redis
+    container_name: erpnext-redis-socketio
+
+  node-socketio:
+    image: donysukardi/erpnext:stable
+    container_name: erpnext-node-socketio
+    command: node-socketio
+
+  db:
+    image: mariadb:latest
+    container_name: erpnext-db
+    volumes:
+      - './config/my.cnf:/etc/mysql/conf.d/frappe.cnf'
+    environment:
+      - MYSQL_ROOT_PASSWORD=asdfasdfasdf
+      - MYSQL_USER=frappe
+      - MYSQL_PASSWORD=frappe
+      - MYSQL_DATABASE=frappe

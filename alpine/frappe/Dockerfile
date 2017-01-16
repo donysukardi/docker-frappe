@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.5
 MAINTAINER Dony Sukardi <ds@dsds.io>
 
 ARG BRANCH
@@ -12,7 +12,7 @@ ENV FRAPPE_BRANCH $BRANCH
 RUN apk add --update \
     alpine-sdk \
     linux-headers \
-    py-pip \
+    py2-pip \
     python-dev \
     mariadb-client \
     mariadb-dev \
